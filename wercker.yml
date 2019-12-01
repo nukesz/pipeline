@@ -43,13 +43,17 @@ build:
         name: go test
         code: |
           go test ./...
+    - script:
+        name: copy files to wercker output
+        code: |
+          cp -R ./ ${WERCKER_OUTPUT_DIR}
 
 deploy:
   steps:
     - internal/docker-push:
         username: $DOCKER_USERNAME
         password: $DOCKER_PASSWORD
-        cmd: /pipeline
+        cmd: /pipeline/source/pipeline
         port: "8080"
         tag: latest
         repository: nukesz/pipeline
