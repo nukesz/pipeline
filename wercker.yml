@@ -11,11 +11,11 @@ box: golang
 # You can also use services such as databases. Read more on our dev center:
 # https://devcenter.wercker.com/administration/services/
 # services:
-    # - postgres
-    # https://devcenter.wercker.com/administration/services/examples/postgresql/
+# - postgres
+# https://devcenter.wercker.com/administration/services/examples/postgresql/
 
-    # - mongo
-    # https://devcenter.wercker.com/administration/services/examples/mongodb/
+# - mongo
+# https://devcenter.wercker.com/administration/services/examples/mongodb/
 build:
   # The steps that will be executed on build
   # Steps make up the actions in your pipeline
@@ -43,3 +43,14 @@ build:
         name: go test
         code: |
           go test ./...
+
+deploy:
+  steps:
+    - internal/docker-push:
+      username: $DOCKER_USERNAME
+      password: $DOCKER_PASSWORD
+      cmd: /pipeline
+      port: "8080"
+      tag: latest
+      repository: nukesz/pipeline
+      registry: https://registry.hub.docker.com
