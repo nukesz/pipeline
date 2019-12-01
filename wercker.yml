@@ -47,10 +47,10 @@ build:
 deploy:
   steps:
     - internal/docker-push:
-      username: $DOCKER_USERNAME
-      password: $DOCKER_PASSWORD
-      cmd: /pipeline
-      port: "8080"
-      tag: latest
-      repository: nukesz/pipeline
-      registry: https://registry.hub.docker.com
+        username: $DOCKER_USERNAME
+        password: $DOCKER_PASSWORD
+        cmd: /pipeline
+        port: "8080"
+        tag: latest
+        repository: nukesz/pipeline
+        registry: https://registry.hub.docker.com
