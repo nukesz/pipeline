@@ -3,6 +3,8 @@ package main
 import (
 	"os"
 
+	service "github.com/nukesz/pipeline/service"
+
 	"github.com/olekukonko/tablewriter"
 )
 
@@ -18,4 +20,11 @@ func main() {
 	table.SetHeader([]string{"NPC", "Speed", "Power", "Location"})
 	table.AppendBulk(data)
 	table.Render()
+
+	port := os.Getenv("PORT")
+	if len(port) == 0 {
+		port = "3000"
+	}
+	s := service.NewServer()
+	s.Run(":" + port)
 }
